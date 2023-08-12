@@ -55,6 +55,37 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+.detalle {
+  border: 1px solid #ccc;
+  margin: 1.5rem auto;
+  padding: 0.5rem 0;
+  max-width: 600px;
+}
+
+.botones {
+  display: flex;
+  justify-content: center;
+}
+
+.boton {
+  margin: 0 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.aceptar {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+}
+
+.rechazar {
+  background-color: #FF5733;
+  color: white;
+  border: none;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
