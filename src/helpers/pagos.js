@@ -1,4 +1,4 @@
-const urlPagos = 'http://localhost:8080/pagos';
+const urlPagos = 'http://localhost:8080/api/pagos';
 
 export const getDetallePago = async (idTrx) => {
   try {
