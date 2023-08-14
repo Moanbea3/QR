@@ -6,11 +6,9 @@ export const useFetchDetallePago = (idTrx) => {
   const [isLoading, setIsLoading] = useState(true)
 
   const fetchDetallePago = async () => {
-    setTimeout(async () => {
-      const detalle = await getDetallePago(idTrx);
-      setDetallePago(detalle)
-      setIsLoading(false)
-    }, 2000)
+    const detalle = await getDetallePago(idTrx);
+    setDetallePago(detalle)
+    setIsLoading(false)
   }
 
   useEffect(() => { fetchDetallePago() }, [])
