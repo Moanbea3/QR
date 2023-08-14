@@ -16,7 +16,7 @@ export const aprobarPago = async (idTrx) => {
     if (!response.ok) throw new Error('Error al confirmar el pago')
     return await response.json()
   } catch (error) {
-    console.error(`Error al aprobar el pago: ${error}`)
+    console.error(error)
   }
 }
 
@@ -26,6 +26,6 @@ export const rechazarPago = async (idTrx) => {
     if (!response.ok) throw new Error('Error al rechazar el pago')
     return await response.json()
   } catch (error) {
-    console.error(`Error al rechazar el pago: ${error}`)
+    console.error(error)
   }
 }
