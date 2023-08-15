@@ -4,10 +4,7 @@ import { Html5QrcodePlugin } from './plugins/Html5QrcodePlugin'
 
 export const Scanner = () => {
   const [idTrx, setIdTrx] = useState(null)
-
-  const onNewScanResult = (decodedText, decodedResult) => {
-    setIdTrx(decodedText)
-  }
+  const onNewScanResult = (decodedText) => setIdTrx(decodedText)
 
   return (
     <div className="App">
