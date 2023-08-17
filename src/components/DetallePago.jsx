@@ -1,13 +1,16 @@
 import { useState } from 'react'
+import { useParams } from 'react-router-dom'
 import { aprobarPago, rechazarPago } from '../helpers/pagos'
 import { useFetchDetallePago } from '../hooks/useFetchDetallePago'
 import { Loader } from './Loader'
 import { ResultadoPago } from './ResultadoPago'
 
-export const DetallePago = ({ idTrx }) => {
+export const DetallePago = () => {
+  const { idTrx } = useParams()
+  const { detallePago, isLoading } = useFetchDetallePago(idTrx)
   const [resultadoPago, setResultadoPago] = useState('')
   const [error, setError] = useState(Error())
-  const { detallePago, isLoading } = useFetchDetallePago(idTrx)
+
 
   const onAprobarPago = async () => {
     try {

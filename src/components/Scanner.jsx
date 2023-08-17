@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { DetallePago } from './DetallePago'
+import { Navigate } from 'react-router-dom'
 import { Html5QrcodePlugin } from './plugins/Html5QrcodePlugin'
 
 export const Scanner = () => {
@@ -8,16 +8,14 @@ export const Scanner = () => {
 
   return (
     <div className="App">
-      {idTrx ? (
-        <DetallePago idTrx={idTrx} />
-      ) : (
-        <Html5QrcodePlugin
-          fps={10}
-          qrbox={250}
-          disableFlip={false}
-          qrCodeSuccessCallback={onNewScanResult}
-        />
-      )}
+      <Html5QrcodePlugin
+        fps={10}
+        qrbox={250}
+        disableFlip={false}
+        qrCodeSuccessCallback={onNewScanResult}
+      />
+
+      { idTrx && <Navigate to={`pagos/${idTrx}`} /> }
     </div>
   )
 }
