@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './App.css'
 import { DetallePago } from './components/DetallePago'
+import { ResultadoPago } from './components/ResultadoPago'
 import { Scanner } from './components/Scanner'
 
 const router = createBrowserRouter([
@@ -9,8 +10,17 @@ const router = createBrowserRouter([
     element: <Scanner />
   },
   {
-    path: 'pagos/:idTrx',
-    element: <DetallePago />
+    path: 'pagos',
+    children: [
+      {
+        path: ':idTrx',
+        element: <DetallePago />
+      },
+      {
+        path: 'result',
+        element: <ResultadoPago />
+      }
+    ]
   }
 ])
 
