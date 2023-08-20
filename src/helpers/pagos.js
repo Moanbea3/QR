@@ -11,10 +11,10 @@ export const getDetallePago = async ({ params }) => {
 }
 
 export const onSubmitPagoAction = async ({ params, request }) => {
-  const formData = await request.formData()
-  const accion = formData.get('accion')
   let url;
   let message;
+  const formData = await request.formData()
+  const accion = formData.get('accion')
 
   if (accion == ButtonAction.APROBAR) {
     url = `${urlPagos}/${params.idTrx}/aprobar`
@@ -26,7 +26,8 @@ export const onSubmitPagoAction = async ({ params, request }) => {
     message = Messages.PAGO_RECHAZADO
   }
 
-  const response = await fetch(url, { method: 'PUT' })
+  const { method } = request
+  const response = await fetch(url, { method })
   if (!response.ok) throw response
   return { message }
 }
