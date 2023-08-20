@@ -10,30 +10,23 @@ export const getDetallePago = async ({ params }) => {
   return defer({ detallePago: response.json() })
 }
 
-export const aprobarPago = async (idTrx) => {
-  const response = await fetch(`${urlPagos}/${idTrx}/aprobar`, { method: 'PUT' })
-  if (!response.ok) throw response
-  return Messages.PAGO_APROBADO
-}
-
-export const rechazarPago = async (idTrx) => {
-  const response = await fetch(`${urlPagos}/${idTrx}/rechazar`, { method: 'PUT' })
-  if (!response.ok) throw response
-  return Messages.PAGO_RECHAZADO
-}
-
-export const onSubmitPago = async ({ params, request }) => {
+export const onSubmitPagoAction = async ({ params, request }) => {
   const formData = await request.formData()
   const accion = formData.get('accion')
+  let url;
   let message;
 
   if (accion == ButtonAction.APROBAR) {
-    message = await aprobarPago(params.idTrx)
+    url = `${urlPagos}/${params.idTrx}/aprobar`
+    message = Messages.PAGO_APROBADO
   }
 
   if (accion == ButtonAction.RECHAZAR) {
-    message = await rechazarPago(params.idTrx)
+    url = `${urlPagos}/${params.idTrx}/rechazar`
+    message = Messages.PAGO_RECHAZADO
   }
 
+  const response = await fetch(url, { method: 'PUT' })
+  if (!response.ok) throw response
   return { message }
 }

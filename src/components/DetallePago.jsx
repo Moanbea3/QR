@@ -32,7 +32,7 @@ function InfoDetallePago() {
         <button className="boton rechazar" type="submit" name="accion" value={ButtonAction.RECHAZAR}>Rechazar</button>
       </div>
       { actionData &&
-        <Navigate to="/pagos/resultado" state={actionData} replace />
+        <Navigate to="/pagos/resultado" replace state={actionData} />
       }
     </Form>
   )

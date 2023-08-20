@@ -4,7 +4,7 @@ import { DetallePago } from './components/DetallePago'
 import { ErrorDetallePago } from './components/ErrorDetallePago'
 import { ResultadoPago } from './components/ResultadoPago'
 import { Scanner } from './components/Scanner'
-import { getDetallePago, onSubmitPago } from './helpers/pagos'
+import { getDetallePago, onSubmitPagoAction } from './helpers/pagos'
 
 const router = createBrowserRouter([
   {
@@ -19,7 +19,7 @@ const router = createBrowserRouter([
         element: <DetallePago />,
         errorElement: <ErrorDetallePago />,
         loader: getDetallePago,
-        action: onSubmitPago
+        action: onSubmitPagoAction
       },
       {
         path: 'resultado',
