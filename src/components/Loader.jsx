@@ -2,7 +2,7 @@ export const Loader = () => {
   return (
     <>
       <p>
-        <strong>Cargando pago...</strong>
+        <strong>Cargando...</strong>
       </p>
       <span className="loader"></span>
     </>

@@ -34,7 +34,6 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
 }
@@ -60,12 +59,19 @@ button {
 
 .aceptar {
   background-color: #4CAF50;
-  color: white;
-  border: none;
 }
 
 .rechazar {
   background-color: #FF5733;
+}
+
+.volver {
+  background-color: #006494;
+}
+
+.aceptar,
+.rechazar,
+.volver {
   color: white;
   border: none;
 }
@@ -89,6 +95,15 @@ button {
   color: #e60f0f;
 }
 
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
 
 @media (prefers-color-scheme: light) {
   :root {
@@ -98,9 +113,5 @@ button {
 
   a:hover {
     color: #747bff;
-  }
-
-  button {
-    background-color: #f9f9f9;
   }
 }

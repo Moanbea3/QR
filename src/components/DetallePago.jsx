@@ -1,56 +1,39 @@
-import { useState } from 'react'
-import { aprobarPago, rechazarPago } from '../helpers/pagos'
-import { useFetchDetallePago } from '../hooks/useFetchDetallePago'
+import { Suspense } from 'react'
+import { Await, Form, Navigate, useActionData, useAsyncValue, useLoaderData } from 'react-router-dom'
+import { ButtonAction } from '../constants/ButtonAction'
 import { Loader } from './Loader'
-import { ResultadoPago } from './ResultadoPago'
 
-export const DetallePago = ({ idTrx }) => {
-  const [resultadoPago, setResultadoPago] = useState('')
-  const [error, setError] = useState(Error())
-  const { detallePago, isLoading } = useFetchDetallePago(idTrx)
-
-  const onAprobarPago = async () => {
-    try {
-      const message = await aprobarPago(idTrx)
-      setResultadoPago(message)
-    } catch (error) {
-      console.error(error)
-      setResultadoPago('')
-      setError(error)
-    }
-  }
-
-  const onRechazarPago = async () => {
-    try {
-      const message = await rechazarPago(idTrx)
-      setResultadoPago(message)
-    } catch (error) {
-      console.error(error)
-      setResultadoPago('')
-      setError(error)
-    }
-  }
+export const DetallePago = () => {
+  const { detallePago } = useLoaderData()
 
   return (
-    isLoading ? (
-      <Loader />
-    ) : (
-      <>
-        <div className="detalle">
-          <h2>Detalle de la compra</h2>
-          <p>Nro. transacción: {detallePago.idTrx}</p>
-          <p>Monto: ${detallePago.monto}</p>
-          <p>Fecha: {detallePago.fecha}</p>
-          {resultadoPago
-            ? <ResultadoPago message={resultadoPago} />
-            : <ResultadoPago message={error.message} type='error' />
-          }
-        </div>
-        <div className="botones">
-          <button className="boton aceptar" onClick={onAprobarPago}>Aceptar</button>
-          <button className="boton rechazar" onClick={onRechazarPago}>Rechazar</button>
-        </div>
-      </>
-    )
+    <Suspense fallback={<Loader />}>
+      <Await resolve={detallePago}>
+        <InfoDetallePago />
+      </Await>
+    </Suspense>
+  )
+}
+
+function InfoDetallePago() {
+  const detallePago = useAsyncValue()
+  const actionData = useActionData()
+
+  return (
+    <Form method="PUT">
+      <div className="detalle">
+        <h2>Detalle de la compra</h2>
+        <p>Nro. transacción: {detallePago.idTrx}</p>
+        <p>Monto: $ {detallePago.monto}</p>
+        <p>Fecha: {detallePago.fecha}</p>
+      </div>
+      <div className="botones">
+        <button className="boton aceptar" type="submit" name="accion" value={ButtonAction.APROBAR}>Aprobar</button>
+        <button className="boton rechazar" type="submit" name="accion" value={ButtonAction.RECHAZAR}>Rechazar</button>
+      </div>
+      { actionData &&
+        <Navigate to="/pagos/resultado" replace state={actionData} />
+      }
+    </Form>
   )
 }
