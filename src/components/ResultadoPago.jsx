@@ -7,7 +7,7 @@ export const ResultadoPago = () => {
   return (
     <>
       <h2 className={type}>{message}</h2>
-      <Link to={'/'}>
+      <Link to="/">
         <button className="volver">Volver a inicio</button>
       </Link>
     </>

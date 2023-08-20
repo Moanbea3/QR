@@ -1,8 +1,10 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './App.css'
 import { DetallePago } from './components/DetallePago'
+import { ErrorDetallePago } from './components/ErrorDetallePago'
 import { ResultadoPago } from './components/ResultadoPago'
 import { Scanner } from './components/Scanner'
+import { getDetallePago, onSubmitPago } from './helpers/pagos'
 
 const router = createBrowserRouter([
   {
@@ -14,10 +16,13 @@ const router = createBrowserRouter([
     children: [
       {
         path: ':idTrx',
-        element: <DetallePago />
+        element: <DetallePago />,
+        errorElement: <ErrorDetallePago />,
+        loader: getDetallePago,
+        action: onSubmitPago
       },
       {
-        path: 'result',
+        path: 'resultado',
         element: <ResultadoPago />
       }
     ]

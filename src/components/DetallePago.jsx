@@ -1,45 +1,26 @@
-import { useNavigate, useParams } from 'react-router-dom'
-import { aprobarPago, rechazarPago } from '../helpers/pagos'
-import { useFetchDetallePago } from '../hooks/useFetchDetallePago'
+import { Suspense } from 'react'
+import { Await, Form, Navigate, useActionData, useAsyncValue, useLoaderData } from 'react-router-dom'
+import { ButtonAction } from '../constants/ButtonAction'
 import { Loader } from './Loader'
 
 export const DetallePago = () => {
-  const { idTrx } = useParams()
-  const navigate = useNavigate()
-  const { detallePago, isLoading } = useFetchDetallePago(idTrx)
-
-  const onAprobarPago = async () => {
-    try {
-      const message = await aprobarPago(idTrx)
-      navigate('/pagos/result', {
-        replace: true,
-        state: {
-          message
-        }
-      })
-    } catch (error) {
-      console.error(error)
-    }
-  }
-
-  const onRechazarPago = async () => {
-    try {
-      const message = await rechazarPago(idTrx)
-      navigate('/pagos/result', {
-        replace: true,
-        state: {
-          message
-        }
-      })
-    } catch (error) {
-      console.error(error)
-    }
-  }
-
-  if (isLoading) return <Loader />
+  const { detallePago } = useLoaderData()
 
   return (
-    <>
+    <Suspense fallback={<Loader />}>
+      <Await resolve={detallePago}>
+        <InfoDetallePago />
+      </Await>
+    </Suspense>
+  )
+}
+
+function InfoDetallePago() {
+  const detallePago = useAsyncValue()
+  const actionData = useActionData()
+
+  return (
+    <Form method="PUT">
       <div className="detalle">
         <h2>Detalle de la compra</h2>
         <p>Nro. transacción: {detallePago.idTrx}</p>
@@ -47,9 +28,12 @@ export const DetallePago = () => {
         <p>Fecha: {detallePago.fecha}</p>
       </div>
       <div className="botones">
-        <button className="boton aceptar" onClick={onAprobarPago}>Aceptar</button>
-        <button className="boton rechazar" onClick={onRechazarPago}>Rechazar</button>
+        <button className="boton aceptar" type="submit" name="accion" value={ButtonAction.APROBAR}>Aprobar</button>
+        <button className="boton rechazar" type="submit" name="accion" value={ButtonAction.RECHAZAR}>Rechazar</button>
       </div>
-    </>
+      { actionData &&
+        <Navigate to="/pagos/resultado" state={actionData} replace />
+      }
+    </Form>
   )
 }
