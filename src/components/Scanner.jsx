@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Html5QrcodePlugin } from './plugins/Html5QrcodePlugin'
 
 export const Scanner = () => {
@@ -7,13 +7,18 @@ export const Scanner = () => {
   const onNewScanResult = (decodedText) => navigate(`/pagos/${decodedText}`)
 
   return (
-    <div className="App">
-      <Html5QrcodePlugin
-        fps={10}
-        qrbox={250}
-        disableFlip={false}
-        qrCodeSuccessCallback={onNewScanResult}
-      />
-    </div>
+    <>
+      <Link to="/">
+        <button className="info" style={{ margin: '10px 0' }}>Cerrar Sesión</button>
+      </Link>
+      <div className="App">
+        <Html5QrcodePlugin
+          fps={10}
+          qrbox={250}
+          disableFlip={false}
+          qrCodeSuccessCallback={onNewScanResult}
+        />
+      </div>
+    </>
   )
 }

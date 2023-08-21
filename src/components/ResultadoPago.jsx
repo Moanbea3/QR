@@ -7,8 +7,8 @@ export const ResultadoPago = () => {
   return (
     <>
       <h2 className="success">{message}</h2>
-      <Link to="/">
-        <button className="volver">Volver a inicio</button>
+      <Link to="/qr">
+        <button className="info">Volver a inicio</button>
       </Link>
     </>
   )

@@ -1,3 +1,3 @@
 export const AuthUsers = Object.freeze([
-  { username: 'admin', password: 'admin' }
+  { username: 'usuario', password: 'usuario' }
 ])

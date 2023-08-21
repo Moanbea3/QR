@@ -65,13 +65,13 @@ button {
   background-color: #FF5733;
 }
 
-.volver {
+.info {
   background-color: #006494;
 }
 
 .aceptar,
 .rechazar,
-.volver {
+.info {
   color: white;
   border: none;
 }

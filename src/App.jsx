@@ -1,20 +1,20 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import './App.css'
 import { DetallePago } from './components/DetallePago'
 import { ErrorDetallePago } from './components/ErrorDetallePago'
+import { Login } from './components/Login'
 import { ResultadoPago } from './components/ResultadoPago'
 import { Scanner } from './components/Scanner'
 import { getDetallePago, onSubmitPagoAction } from './helpers/pagos'
-import { Login } from './components/Login'
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Scanner />
+    element: <Login />
   },
   {
-    path: 'login',
-    element: <Login />
+    path: 'qr',
+    element: <Scanner />
   },
   {
     path: 'pagos',

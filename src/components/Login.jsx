@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { AuthUsers } from '../constants/UserCollection'
 import { useNavigate } from 'react-router-dom'
+import { AuthUsers } from '../constants/UserCollection'
 
 export const Login = () => {
   const navigate = useNavigate()
@@ -14,7 +14,7 @@ export const Login = () => {
     )
 
     if (esUsuarioAutorizado) {
-      navigate('/')
+      navigate('/qr')
     } else {
       setIsLoginError(true)
     }

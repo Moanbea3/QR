@@ -6,8 +6,8 @@ export const ErrorDetallePago = () => {
   if (!error?.data) return (
     <>
       <h2>Ocurrio un error inesperado</h2>
-      <Link to="/">
-        <button className="volver">Volver al inicio</button>
+      <Link to="/qr">
+        <button className="info">Volver al inicio</button>
       </Link>
     </>
   )
@@ -15,8 +15,8 @@ export const ErrorDetallePago = () => {
   return (
     <>
       <h2>{error.data.message}</h2>
-      <Link to="/">
-        <button className="volver">Volver al inicio</button>
+      <Link to="/qr">
+        <button className="info">Volver al inicio</button>
       </Link>
     </>
   )
