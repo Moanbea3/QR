@@ -5,11 +5,16 @@ import { ErrorDetallePago } from './components/ErrorDetallePago'
 import { ResultadoPago } from './components/ResultadoPago'
 import { Scanner } from './components/Scanner'
 import { getDetallePago, onSubmitPagoAction } from './helpers/pagos'
+import { Login } from './components/Login'
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Scanner />
+  },
+  {
+    path: 'login',
+    element: <Login />
   },
   {
     path: 'pagos',
