@@ -21,19 +21,18 @@ function InfoDetallePago() {
 
   return (
     <Form method="PUT">
-      <div className="detalle">
+      <div className="detalle w-50">
         <h2>Detalle de la compra</h2>
         <p>Nro. transacción: {detallePago.idTrx}</p>
         <p>Monto: $ {detallePago.monto}</p>
+        <input type="hidden" name="monto" value={detallePago.monto} />
         <p>Fecha: {detallePago.fecha}</p>
       </div>
       <div className="botones">
         <button className="boton aceptar" type="submit" name="accion" value={ButtonAction.APROBAR}>Aprobar</button>
         <button className="boton rechazar" type="submit" name="accion" value={ButtonAction.RECHAZAR}>Rechazar</button>
       </div>
-      { actionData &&
-        <Navigate to="/pagos/resultado" replace state={actionData} />
-      }
+      { actionData && <Navigate to="/home/qr/resultado" replace state={actionData} /> }
     </Form>
   )
 }

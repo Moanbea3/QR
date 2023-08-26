@@ -13,16 +13,20 @@ export const Login = () => {
       (user) => user.username === username && user.password === password
     )
 
-    if (esUsuarioAutorizado) {
-      navigate('/qr')
-    } else {
+    if (!esUsuarioAutorizado) {
       setIsLoginError(true)
+      return
     }
+
+    localStorage.setItem('username', username)
+    navigate('/home')
   }
 
   return (
     <div className="login-container">
-      <div className="login-form">
+      <h1>Pago QR</h1>
+
+      <div className="login-form col-6">
         <div>
           <input
             type="text"

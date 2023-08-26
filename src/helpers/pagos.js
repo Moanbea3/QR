@@ -11,23 +11,27 @@ export const getDetallePago = async ({ params }) => {
 }
 
 export const onSubmitPagoAction = async ({ params, request }) => {
-  let url;
-  let message;
   const formData = await request.formData()
   const accion = formData.get('accion')
+  let url
+  let message, monto = 0, type
 
   if (accion == ButtonAction.APROBAR) {
     url = `${urlPagos}/${params.idTrx}/aprobar`
     message = Messages.PAGO_APROBADO
+    monto = Number(formData.get('monto'))
+    type = 'success'
   }
 
   if (accion == ButtonAction.RECHAZAR) {
     url = `${urlPagos}/${params.idTrx}/rechazar`
     message = Messages.PAGO_RECHAZADO
+    type = 'error'
   }
 
   const { method } = request
   const response = await fetch(url, { method })
   if (!response.ok) throw response
-  return { message }
+
+  return { message, monto, type }
 }
